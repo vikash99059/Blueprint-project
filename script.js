@@ -37,6 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileNav);
   mobileLinks.forEach(link => link.addEventListener('click', closeMobileNav));
 
+  document.addEventListener('click', (e) => {
+    if (mobileNav && mobileNav.classList.contains('active') &&
+        !mobileNav.contains(e.target) &&
+        menuToggle && !menuToggle.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
+
   // 3. Smooth scroll reveals using IntersectionObserver
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   const revealObserver = new IntersectionObserver((entries, observer) => {

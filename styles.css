@@ -62,15 +62,23 @@ html {
   color: var(--text-body);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   position: relative;
   overflow-x: hidden;
+  max-width: 100%;
   line-height: 1.6;
   font-size: 0.92rem;
   /* Clean, compact, refined font size */
   background: var(--bg-white);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Typography Scale (Compact & Professional) */
@@ -262,12 +270,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .brand-icon {
@@ -282,6 +292,7 @@ a {
   font-size: 1rem;
   font-weight: 800;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
 }
 
 .brand-text {
@@ -290,31 +301,41 @@ a {
 }
 
 .brand-title {
-  font-size: 0.88rem;
+  font-size: clamp(0.78rem, 1.2vw, 0.88rem);
   font-weight: 800;
   letter-spacing: 0.04em;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 
 .brand-subtitle {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
   color: #BFDBFE;
   letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: clamp(10px, 1.6vw, 24px);
   list-style: none;
 }
 
 .nav-link {
-  font-size: 0.85rem;
+  font-size: clamp(0.78rem, 0.85vw, 0.85rem);
   font-weight: 600;
   color: #E0E7FF;
   transition: color var(--transition-fast);
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -325,12 +346,15 @@ a {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .btn-header {
-  padding: 9px 18px;
-  font-size: 0.82rem;
+  padding: 8px clamp(12px, 1.2vw, 18px);
+  font-size: clamp(0.75rem, 0.8vw, 0.82rem);
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .mobile-menu-toggle {
@@ -345,6 +369,11 @@ a {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.mobile-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* Mobile Nav Drawer */
@@ -352,17 +381,19 @@ a {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 84%;
+  width: 86%;
   max-width: 340px;
   height: 100vh;
   background: #FFFFFF;
   border-left: 1px solid var(--border-light);
   z-index: 1001;
-  padding: 28px 20px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   transition: right var(--transition-normal);
   box-shadow: -15px 0 40px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.active {
@@ -483,11 +514,12 @@ a {
 
 .hero-content-left .hero-title {
   color: #FFFFFF;
-  font-size: 2.35rem;
+  font-size: clamp(1.65rem, 3.2vw + 0.6rem, 2.35rem);
   margin-bottom: 12px;
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.015em;
+  word-break: break-word;
 }
 
 .hero-content-left .hero-subtitle {
@@ -567,6 +599,7 @@ a {
 .hero-device-wrapper-right {
   position: relative;
   width: 100%;
+  max-width: 100%;
 }
 
 .hero-laptop-frame {
@@ -577,6 +610,8 @@ a {
   border: 3px solid rgba(255, 255, 255, 0.85);
   background: #000;
   transition: transform var(--transition-normal);
+  width: 100%;
+  max-width: 100%;
 }
 
 .hero-laptop-frame:hover {
@@ -585,6 +620,7 @@ a {
 
 .hero-device-img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
 }
@@ -597,12 +633,14 @@ a {
   background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(8px);
   color: #FFFFFF;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: var(--radius-sm);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 /* ==========================================================================
@@ -615,8 +653,10 @@ a {
 
 .blue-cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .blue-feature-card {
@@ -630,6 +670,7 @@ a {
   flex-direction: column;
   align-items: center;
   box-shadow: 0 10px 24px rgba(0, 102, 255, 0.22);
+  min-width: 0;
 }
 
 .blue-feature-card:hover {
@@ -1497,6 +1538,42 @@ a {
   flex-wrap: wrap;
 }
 
+.btn-contact-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.btn-contact-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.btn-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.25;
+}
+
+.btn-main-label {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.btn-sub-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+}
+
 /* ==========================================================================
    FULL-WIDTH BLUE CTA BANNER (Directly matching reference image)
    ========================================================================== */
@@ -1768,6 +1845,16 @@ a {
    RESPONSIVE DESIGN BREAKPOINTS (ALL SCREENS & MOBILE VIEWS)
    ========================================================================== */
 @media (max-width: 1024px) {
+  /* Switch navbar to mobile hamburger navigation BEFORE any clipping */
+  .desktop-nav,
+  .header-cta .btn-header {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex !important;
+  }
+
   .hero-split-grid {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -1787,13 +1874,19 @@ a {
     justify-content: center;
   }
 
-  .blue-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .hero-laptop-frame {
+    max-width: 680px;
+    margin: 0 auto;
   }
 
   .split-layout {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .tablet-media-img {
+    height: auto;
+    max-height: 380px;
   }
 
   .stats-grid {
@@ -1812,6 +1905,11 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .showcase-visual-img {
+    height: auto;
+    max-height: 380px;
+  }
+
   .audience-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1822,16 +1920,6 @@ a {
 }
 
 @media (max-width: 768px) {
-
-  .nav-links,
-  .header-cta .btn-header {
-    display: none;
-  }
-
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
   .hero-title {
     font-size: 1.85rem;
   }
@@ -1840,8 +1928,26 @@ a {
     font-size: 0.95rem;
   }
 
+  .hero-cta-group-left {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group-left .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-price-tag-left {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* 4 Feature Cards: 1 column on mobile */
   .blue-cards-grid {
     grid-template-columns: 1fr;
+    max-width: 100%;
   }
 
   .stats-grid {
@@ -1870,32 +1976,197 @@ a {
 
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
   }
 
   .btn-large-buy {
     width: 100%;
   }
 
+  /* Floating WhatsApp on mobile */
+  .floating-whatsapp {
+    bottom: 18px;
+    right: 18px;
+  }
+
   .floating-whatsapp .whatsapp-label {
     display: none;
+  }
+
+  .floating-whatsapp .whatsapp-bubble {
+    width: 48px;
+    height: 48px;
+    font-size: 1.45rem;
+  }
+
+  .contact-channels {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 380px;
+    margin: 24px auto 0;
+    gap: 12px;
+  }
+
+  .contact-channels .btn,
+  .contact-channels .btn-contact-action {
+    width: 100%;
+    padding: 13px 20px;
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.65rem;
+  .container {
+    padding: 0 16px;
   }
 
-  h2 {
+  .site-header {
+    height: 64px;
+  }
+
+  .site-header.scrolled {
+    height: 60px;
+  }
+
+  .hero-section {
+    padding-top: calc(64px + 24px);
+    padding-bottom: 50px;
+  }
+
+  .hero-content-left .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-content-left .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero-content-left .hero-desc {
+    font-size: 0.85rem;
+  }
+
+  .hero-image-badge-tag {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+
+  .section-header {
+    margin-bottom: 30px;
+  }
+
+  .section-header h2 {
     font-size: 1.4rem;
   }
 
-  .hero-device-wrapper {
-    margin: 0 -8px;
-    border-width: 2px;
+  .stat-number {
+    font-size: 2.2rem;
   }
 
+  .econ-metric {
+    font-size: 1.6rem;
+  }
+
+  .inv-price {
+    font-size: 2.2rem;
+  }
+
+  .final-price-tag {
+    font-size: 2rem;
+  }
+
+  .final-cta-box h2 {
+    font-size: 1.65rem;
+  }
+
+  .exclusivity-card {
+    padding: 28px 18px;
+  }
+
+  .exclusivity-title {
+    font-size: 1.4rem;
+  }
+
+  .value-card-master {
+    padding: 26px 18px;
+  }
+
+  .contact-card {
+    padding: 28px 18px;
+  }
+
+  .btn {
+    padding: 11px 16px;
+    font-size: 0.82rem;
+  }
+
+  .btn-large-buy {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+  }
+
+  .floating-whatsapp {
+    bottom: 14px;
+    right: 14px;
+  }
+
+  .floating-whatsapp .whatsapp-bubble {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+
+  .roadmap-phase {
+    padding-left: 40px;
+  }
+
+  .roadmap-timeline::before {
+    left: 14px;
+  }
+
+  .roadmap-dot {
+    left: 5px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .modal-content {
+    padding: 22px 18px;
+    width: calc(100% - 24px);
+  }
+}
+
+@media (max-width: 360px) {
   .container {
-    padding: 0 16px;
+    padding: 0 12px;
+  }
+
+  .brand-title {
+    font-size: 0.74rem;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  .hero-pill-badge {
+    font-size: 0.64rem;
+    padding: 4px 8px;
+  }
+
+  .hero-content-left .hero-title {
+    font-size: 1.45rem;
   }
 }
